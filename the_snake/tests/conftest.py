@@ -26,12 +26,11 @@ TIMEOUT_ASSERT_MSG = (
 
 def import_the_snake():
 
-
     """import the_snake  # noqa"""
-
-    
 @pytest.fixture(scope='session')
+
 def snake_import_test():
+
     check_import_process = Process(target=import_the_snake)
     check_import_process.start()
     pid = check_import_process.pid
