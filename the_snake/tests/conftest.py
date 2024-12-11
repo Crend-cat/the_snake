@@ -27,8 +27,8 @@ TIMEOUT_ASSERT_MSG = (
 
 @pytest.fixture(scope='session')
 def snake_import_test():
-    def import_the_snake():
-        import the_snake  # noqa
+
+
 
     check_import_process = Process(target=import_the_snake)
     check_import_process.start()
@@ -78,7 +78,7 @@ def _create_game_object(class_name, module):
         raise AssertionError(
             f'При создании объекта класса `{class_name}` произошла ошибка:\n'
             f'`{type(error).__name__}: {error}`\n'
-            f'Если в конструктор класса `{class_name}` помимо параметра `self` '
+            f'Если в конструктор класса `{class_name}` помимо пар-ра `self` '
             f'передаются какие-то ещё параметры - убедитесь, что для них '
             f'установлены значения по умолчанию. Например:\n'
             '`def __init__(self, <параметр>=<значение_по_умолчанию>):`'
