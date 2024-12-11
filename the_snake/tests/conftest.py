@@ -18,19 +18,18 @@ TIMEOUT_ASSERT_MSG = (
     'Проект работает некорректно, проверка прервана.\n'
     'Вероятные причины ошибки:\n'
     '1. Исполняемый код (например, вызов функции `main()`) оказался в '
-    'глобальной зоне видимости. Как исправить: вызов функции `main` поместите '
-    'внутрь конструкции `if __name__ == "__main__":`.\n'
+    'глобальной зоне видимости. Как исправить: вызов функции `main` '
+    'поместите внутрь конструкции `if __name__ == "__main__":`.\n'
     '2. В цикле `while True` внутри функции `main` отсутствует вызов метода '
     '`tick` объекта `clock`. Не изменяйте прекод в этой части.'
 )
 
 
-def import_the_snake():
-    import the_snake  # noqa
-
-
 @pytest.fixture(scope='session')
 def snake_import_test():
+    def import_the_snake():
+        import the_snake  # noqa
+
     check_import_process = Process(target=import_the_snake)
     check_import_process.start()
     pid = check_import_process.pid
