@@ -113,6 +113,7 @@ def loop_breaker_decorator(func):
         if call_counter > 1:
             raise StopInfiniteLoop
         return result
+
     return wrapper
 
 
@@ -136,4 +137,3 @@ def modified_clock(_the_snake):
     _the_snake.clock = modified_clock_obj
     yield
     _the_snake.clock = original_clock
-
