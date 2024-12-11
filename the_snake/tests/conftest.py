@@ -25,15 +25,10 @@ TIMEOUT_ASSERT_MSG = (
 )
 
 def import_the_snake():
-
-
     """import the_snake"""
 
-    
 @pytest.fixture(scope='session')
-
 def snake_import_test():
-
     check_import_process = Process(target=import_the_snake)
     check_import_process.start()
     pid = check_import_process.pid
@@ -41,7 +36,6 @@ def snake_import_test():
     if check_import_process.is_alive():
         os.kill(pid, 9)
         raise AssertionError(TIMEOUT_ASSERT_MSG)
-
 
 @pytest.fixture(scope='session')
 def _the_snake(snake_import_test):
@@ -54,10 +48,9 @@ def _the_snake(snake_import_test):
         )
     for class_name in ('GameObject', 'Snake', 'Apple'):
         assert hasattr(the_snake, class_name), (
-            f'Убедитесь, что в модуле `the_snake` опред класс `{class_name}`.'
+            f'Убедитесь, что в модуле `the_snake` определен класс `{class_name}`.'
         )
     return the_snake
-
 
 def write_timeout_reasons(text, stream=None):
     """Write possible reasons of tests timeout to stream.
@@ -71,9 +64,7 @@ def write_timeout_reasons(text, stream=None):
     text = TIMEOUT_ASSERT_MSG
     stream.write(text)
 
-
 pytest_timeout.write = write_timeout_reasons
-
 
 def _create_game_object(class_name, module):
     try:
@@ -82,31 +73,26 @@ def _create_game_object(class_name, module):
         raise AssertionError(
             f'При создании объекта класса `{class_name}` произошла ошибка:\n'
             f'`{type(error).__name__}: {error}`\n'
-            f'Если в конструктор класса `{class_name}` помимо пар-ра `self` '
+            f'Если в конструктор класса `{class_name}` помимо параметра `self` '
             f'передаются какие-то ещё параметры - убедитесь, что для них '
             f'установлены значения по умолчанию. Например:\n'
             '`def __init__(self, <параметр>=<значение_по_умолчанию>):`'
         )
 
-
 @pytest.fixture
 def game_object(_the_snake):
     return _create_game_object('GameObject', _the_snake)
-
 
 @pytest.fixture
 def snake(_the_snake):
     return _create_game_object('Snake', _the_snake)
 
-
 @pytest.fixture
 def apple(_the_snake):
     return _create_game_object('Apple', _the_snake)
 
-
 class StopInfiniteLoop(Exception):
     pass
-
 
 def loop_breaker_decorator(func):
     call_counter = 0
@@ -119,7 +105,6 @@ def loop_breaker_decorator(func):
             raise StopInfiniteLoop
         return result
     return wrapper
-
 
 @pytest.fixture
 def modified_clock(_the_snake):
