@@ -27,9 +27,6 @@ TIMEOUT_ASSERT_MSG = (
 
 @pytest.fixture(scope='session')
 def snake_import_test():
-
-
-
     check_import_process = Process(target=import_the_snake)
     check_import_process.start()
     pid = check_import_process.pid
@@ -50,7 +47,7 @@ def _the_snake(snake_import_test):
         )
     for class_name in ('GameObject', 'Snake', 'Apple'):
         assert hasattr(the_snake, class_name), (
-            f'Убедитесь, что в модуле `the_snake` определен класс `{class_name}`.'
+            f'Убедитесь, что в модуле `the_snake` опред класс `{class_name}`.'
         )
     return the_snake
 
