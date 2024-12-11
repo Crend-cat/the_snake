@@ -10,8 +10,6 @@ import pytest_timeout
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 sys.path.append(str(BASE_DIR))
-
-# Hide the pygame screen
 os.environ['SDL_VIDEODRIVER'] = 'dummy'
 
 TIMEOUT_ASSERT_MSG = (
@@ -26,7 +24,7 @@ TIMEOUT_ASSERT_MSG = (
 
 
 def import_the_snake():
-    import the_snake  # noqa
+    """import the_snake"""
 
 
 @pytest.fixture(scope='session')
@@ -51,7 +49,7 @@ def _the_snake(snake_import_test):
         )
     for class_name in ('GameObject', 'Snake', 'Apple'):
         assert hasattr(the_snake, class_name), (
-            f'Убедитесь, что в модуле `the_snake` определен класс `{class_name}`.'
+            f'Убедитесь, что в `the_snake` определен класс `{class_name}`.'
         )
     return the_snake
 
@@ -138,3 +136,4 @@ def modified_clock(_the_snake):
     _the_snake.clock = modified_clock_obj
     yield
     _the_snake.clock = original_clock
+
