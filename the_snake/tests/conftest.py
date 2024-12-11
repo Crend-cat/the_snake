@@ -24,7 +24,9 @@ TIMEOUT_ASSERT_MSG = (
     '`tick` объекта `clock`. Не изменяйте прекод в этой части.'
 )
 
-
+def import_the_snake():
+    import the_snake  # noqa
+    
 @pytest.fixture(scope='session')
 def snake_import_test():
     check_import_process = Process(target=import_the_snake)
